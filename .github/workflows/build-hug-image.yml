@@ -11,22 +11,20 @@ on:
   pull_request:
     branches: [ hug ]
   workflow_dispatch:
+
 # ← 必须放在这里！顶级 permissions
 permissions:
   contents: read
   packages: write
+
 jobs:
   build:
     runs-on: ubuntu-latest
-    permissions:
-      contents: read
-      packages: write
-
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
         with:
-          ref: hug 
+          ref: hug
 
       - name: Log in to GitHub Container Registry
         uses: docker/login-action@v3
@@ -43,8 +41,7 @@ jobs:
         with:
           context: .
           push: true
-          tags: |
-            ghcr.io/${{ github.repository_owner }}/summer:latest
+          tags: ghcr.io/${{ github.repository_owner }}/summer:latest
           labels: |
             org.opencontainers.image.source=https://github.com/${{ github.repository }}
             org.opencontainers.image.description=http server
