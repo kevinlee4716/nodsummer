@@ -11,7 +11,10 @@ on:
   pull_request:
     branches: [ hug ]
   workflow_dispatch:
-
+# ← 必须放在这里！顶级 permissions
+permissions:
+  contents: read
+  packages: write
 jobs:
   build:
     runs-on: ubuntu-latest
